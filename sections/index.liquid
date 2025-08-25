@@ -1,0 +1,306 @@
+<div class="hero-section">
+  <div class="video-container">
+    <iframe 
+      class="hero-video"
+      src="https://www.youtube.com/embed/_faV3W_mheM?autoplay=1&mute=1&loop=1&playlist=_faV3W_mheM&controls=0&showinfo=0&rel=0&modestbranding=1"
+      frameborder="0"
+      allow="autoplay; encrypted-media"
+      allowfullscreen>
+    </iframe>
+    <div class="video-overlay"></div>
+  </div>
+  
+  <div class="hero-content">
+    <h1 class="band-name">{{ section.settings.band_name | default: 'EMPIRE SPRINGS' }}</h1>
+    
+    <div class="announcement">
+      <h2 class="album-title">{{ section.settings.heading_text | default: 'CIRCLE FORBIDDEN OUT NOW!' }}</h2>
+      <p class="album-subtitle">{{ section.settings.paragraph_text | default: 'Listen on all major streaming platforms.' }}</p>
+    </div>
+    
+    <div class="platform-links">
+      {% if section.settings.spotify_url %}
+        <a href="{{ section.settings.spotify_url }}" class="platform-link" target="_blank" rel="noopener">
+          <span>SPOTIFY</span>
+        </a>
+      {% endif %}
+      {% if section.settings.apple_music_url %}
+        <a href="{{ section.settings.apple_music_url }}" class="platform-link" target="_blank" rel="noopener">
+          <span>APPLE MUSIC</span>
+        </a>
+      {% endif %}
+      {% if section.settings.youtube_url %}
+        <a href="{{ section.settings.youtube_url }}" class="platform-link" target="_blank" rel="noopener">
+          <span>YOUTUBE</span>
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .hero-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 600px;
+    overflow: hidden;
+    background: #000;
+  }
+
+  .video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+  }
+
+  .video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, 
+      rgba(0,0,0,0.7) 0%, 
+      rgba(0,0,0,0.4) 50%, 
+      rgba(0,0,0,0.9) 100%);
+    z-index: 2;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 3;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .band-name {
+    font-size: clamp(3rem, 10vw, 8rem);
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+    color: #fff;
+    margin: 0;
+    line-height: 0.9;
+    text-shadow: 
+      3px 3px 0 #000,
+      -3px -3px 0 #000,
+      3px -3px 0 #000,
+      -3px 3px 0 #000,
+      0 0 30px rgba(255,255,255,0.3);
+    animation: glitch 3s infinite;
+  }
+
+  @keyframes glitch {
+    0%, 100% {
+      text-shadow: 
+        3px 3px 0 #000,
+        -3px -3px 0 #000,
+        3px -3px 0 #000,
+        -3px 3px 0 #000,
+        0 0 30px rgba(255,255,255,0.3);
+    }
+    97% {
+      text-shadow: 
+        3px 3px 0 #000,
+        -3px -3px 0 #000,
+        3px -3px 0 #000,
+        -3px 3px 0 #000,
+        0 0 30px rgba(255,255,255,0.3);
+    }
+    98% {
+      text-shadow: 
+        -5px 0 0 rgba(255,255,255,0.5),
+        5px 0 0 rgba(128,128,128,0.5),
+        3px 3px 0 #000,
+        -3px -3px 0 #000,
+        0 0 30px rgba(255,255,255,0.5);
+    }
+    99% {
+      text-shadow: 
+        3px 3px 0 #000,
+        -3px -3px 0 #000,
+        3px -3px 0 #000,
+        -3px 3px 0 #000,
+        0 0 30px rgba(255,255,255,0.3);
+    }
+  }
+
+  .announcement {
+    margin: 3rem 0;
+    padding: 2rem;
+    border: 3px solid #fff;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(10px);
+    transform: skewY(-2deg);
+  }
+
+  .announcement > * {
+    transform: skewY(2deg);
+  }
+
+  .album-title {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #fff;
+    margin: 0 0 0.5rem 0;
+    line-height: 1;
+  }
+
+  .album-subtitle {
+    font-size: clamp(0.9rem, 2vw, 1.2rem);
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: #888;
+    margin: 0;
+    font-weight: 300;
+  }
+
+  .platform-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .platform-link {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: #fff;
+    color: #000;
+    text-decoration: none;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border: 3px solid #fff;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .platform-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    transition: left 0.3s ease;
+    z-index: 1;
+  }
+
+  .platform-link span {
+    position: relative;
+    z-index: 2;
+  }
+
+  .platform-link:hover {
+    background: #000;
+    color: #fff;
+    transform: scale(1.05) rotate(-1deg);
+    box-shadow: 
+      5px 5px 0 rgba(255,255,255,0.3),
+      -5px -5px 0 rgba(255,255,255,0.3);
+  }
+
+  .platform-link:hover::before {
+    left: 0;
+  }
+
+  .platform-link:active {
+    transform: scale(0.98) rotate(0deg);
+    box-shadow: none;
+  }
+
+  @media (max-width: 768px) {
+    .hero-content {
+      padding: 1rem;
+    }
+
+    .announcement {
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .platform-links {
+      flex-direction: column;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .platform-link {
+      width: 100%;
+      text-align: center;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Hero Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "band_name",
+      "label": "Band Name",
+      "default": "EMPIRE SPRINGS"
+    },
+    {
+      "type": "text",
+      "id": "heading_text",
+      "label": "Heading Text",
+      "default": "CIRCLE FORBIDDEN OUT NOW!"
+    },
+    {
+      "type": "text",
+      "id": "paragraph_text",
+      "label": "Subtitle Text",
+      "default": "Listen on all major streaming platforms."
+    },
+    {
+      "type": "url",
+      "id": "spotify_url",
+      "label": "Spotify URL"
+    },
+    {
+      "type": "url",
+      "id": "apple_music_url",
+      "label": "Apple Music URL"
+    },
+    {
+      "type": "url",
+      "id": "youtube_url",
+      "label": "YouTube URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Section"
+    }
+  ]
+}
+{% endschema %}
