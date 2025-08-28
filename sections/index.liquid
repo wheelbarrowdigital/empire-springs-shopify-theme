@@ -1,288 +1,119 @@
-<div class="hero-section">
-  <div class="video-container">
-    <iframe
-      class="hero-video"
-      src="https://www.youtube.com/embed/_faV3W_mheM?autoplay=1&mute=1&loop=1&playlist=_faV3W_mheM&controls=0&showinfo=0&rel=0&modestbranding=1"
-      frameborder="0"
-      allow="autoplay; encrypted-media"
-      allowfullscreen
-    >
-    </iframe>
-    <div class="video-overlay"></div>
+<!-- Hero Section with Background Video -->
+<div class="relative w-full min-h-[720px] overflow-hidden flex items-end px-20 py-20">
+  <!-- Video Container -->
+  <div class="absolute inset-0 z-10">
+    {% if section.settings.video_url %}
+      {% assign video_id = section.settings.video_url | split: 'v=' | last | split: '&' | first | split: '/' | last %}
+      <iframe
+        class="absolute top-1/2 left-1/2 w-[100vw] h-[56.25vw] min-h-screen min-w-[177.77vh] -translate-x-1/2 -translate-y-1/2 object-cover"
+        src="https://www.youtube.com/embed/{{ video_id }}?autoplay=1&mute=1&loop=1&playlist={{ video_id }}&controls=0&showinfo=0&rel=0&modestbranding=1"
+        frameborder="0"
+        allow="autoplay; encrypted-media"
+        allowfullscreen
+      >
+      </iframe>
+    {% elsif section.settings.video_embed %}
+      {{ section.settings.video_embed }}
+    {% endif %}
+    <!-- Video Overlay -->
+    <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/90 z-20"></div>
   </div>
 
-  <div class="hero-content">
-    <div class="announcement">
+  <!-- Hero Content -->
+  <div class="w-full relative z-30 flex flex-row justify-between items-end gap-8">
+    <!-- Announcement Section -->
+    <div class="text-left">
       {% if section.settings.subtitle_text %}
-        <p class="album-subtitle">
+        <p class="text-sm md:text-base uppercase tracking-widest text-white/60 font-light">
           {{ section.settings.subtitle_text }}
         </p>
       {% endif %}
-      <h2 class="album-title text-red-500 mt-8">{{ section.settings.album_name }}</h2>
-      <div class="platform-links">
+      <h2 class="text-3xl lg:text-7xl 2xl:text-8xl text-white font-semibold uppercase tracking-tight mt-2 leading-none">
+        {{ section.settings.album_name }}
+      </h2>
+
+      <!-- Platform Links -->
+      <div class="mt-8 flex gap-6 flex-wrap">
         {% if section.settings.spotify_url %}
           <a
             href="{{ section.settings.spotify_url }}"
-            class="platform-link spotify"
+            class="inline-flex items-center justify-center w-10 h-10 "
             target="_blank"
             rel="noopener"
             aria-label="Listen on Spotify"
           >
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+            <svg
+              class="fill-[#1ED760]"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M11.9999 0.25C5.51075 0.25 0.25 5.51075 0.25 12.0001C0.25 18.4897 5.51075 23.75 11.9999 23.75C18.4898 23.75 23.75 18.4897 23.75 12.0001C23.75 5.51118 18.4899 0.25 11.9999 0.25ZM17.3884 17.197C17.1779 17.5422 16.7261 17.6516 16.381 17.4397C13.6222 15.7546 10.1493 15.3729 6.05923 16.3074C5.6651 16.3972 5.27223 16.1502 5.18243 15.7559C5.09223 15.3617 5.33818 14.9688 5.7333 14.879C10.2092 13.8564 14.0484 14.2967 17.1456 16.1895C17.4908 16.4014 17.6002 16.8518 17.3884 17.197ZM18.8265 13.9976C18.5613 14.4286 17.9973 14.5647 17.5666 14.2995C14.4082 12.3582 9.59378 11.7959 5.85803 12.9299C5.37355 13.0763 4.86183 12.8032 4.71478 12.3195C4.56888 11.835 4.84205 11.3243 5.3257 11.177C9.59292 9.8822 14.8979 10.5094 18.5249 12.7382C18.9556 13.0034 19.0917 13.5674 18.8265 13.9976ZM18.95 10.666C15.1631 8.41662 8.9151 8.2098 5.29945 9.3072C4.71885 9.48328 4.10485 9.1555 3.92893 8.5749C3.75298 7.994 4.08045 7.38042 4.66148 7.2039C8.81195 5.9439 15.7117 6.18732 20.0716 8.77567C20.595 9.08562 20.7662 9.76012 20.4561 10.2816C20.1474 10.8039 19.4706 10.9761 18.95 10.666Z" />
             </svg>
           </a>
         {% endif %}
         {% if section.settings.apple_music_url %}
           <a
             href="{{ section.settings.apple_music_url }}"
-            class="platform-link apple-music"
+            class="inline-flex items-center justify-center w-10 h-10 transition-all duration-300 hover:scale-110 hover:bg-white/10 hover:border-[#fa2e4e] hover:shadow-[0_0_20px_rgba(250,46,78,0.5)] active:scale-95"
             target="_blank"
             rel="noopener"
             aria-label="Listen on Apple Music"
           >
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M23.994 6.124a9.23 9.23 0 00-.24-2.19c-.317-1.31-1.062-2.31-2.18-3.043a5.022 5.022 0 00-1.877-.726 10.496 10.496 0 00-1.564-.15c-.04-.003-.083-.01-.124-.013H5.986c-.152.01-.303.017-.455.026-.747.043-1.49.123-2.193.4-1.336.53-2.3 1.452-2.865 2.78-.192.448-.292.925-.363 1.408-.056.392-.088.785-.1 1.18 0 .032-.007.062-.01.093v12.223c.01.14.017.283.027.424.05.815.154 1.624.497 2.373.65 1.42 1.738 2.353 3.234 2.801.42.127.856.187 1.293.228.555.053 1.11.06 1.667.06h11.03a12.5 12.5 0 001.57-.1c.822-.078 1.596-.31 2.3-.81a5.384 5.384 0 001.93-2.234c.23-.548.346-1.12.42-1.703.027-.218.04-.436.046-.655V6.126c0-.017.003-.033.003-.05v-.05-.002zm-3.693 5.49v5.557c0 .576-.032 1.145-.204 1.693-.16.517-.403.96-.874 1.26-.492.316-1.037.473-1.617.506-.75.043-1.482-.052-2.157-.437-.905-.516-1.394-1.29-1.493-2.326a3.255 3.255 0 01.158-1.498c.3-.736.85-1.25 1.595-1.54.746-.29 1.52-.415 2.306-.486.9-.083 1.797-.136 2.698-.16v-.688c0-.542.032-1.083-.043-1.62-.045-.325-.127-.64-.324-.892a1.176 1.176 0 00-.854-.417 9.922 9.922 0 00-.884-.043c-.586 0-1.142.08-1.606.474-.29.246-.458.567-.524.933-.012.073-.05.133-.123.143-.494.066-.987.13-1.48.197-.128.018-.196-.04-.208-.173-.025-.277.006-.552.065-.824.227-1.055.795-1.806 1.753-2.17.784-.3 1.608-.402 2.453-.356.615.033 1.217.125 1.78.4.927.45 1.482 1.194 1.69 2.204.076.373.107.753.107 1.134v5.548zm-3.645 3.668c.468-.123.907-.313 1.268-.636.377-.337.59-.757.667-1.245a3.2 3.2 0 00-.014-1.166c-.09-.33-.258-.607-.506-.82-.257-.22-.57-.333-.907-.378-.65-.086-1.3-.107-1.954-.085-.536.018-1.07.06-1.583.243-.425.15-.776.377-.997.73-.248.396-.31.84-.194 1.29.115.444.392.78.785.992.457.248.958.352 1.476.393.615.048 1.225.015 1.833-.036.19-.015.38-.043.57-.08l.056-.01zm-9.014-6.09v8.866c0 .11-.013.217-.06.31-.117.24-.368.335-.61.294-.12-.02-.232-.072-.328-.147a.769.769 0 01-.255-.414c-.014-.07-.018-.14-.018-.21V8.426c0-.052 0-.105.002-.157a.815.815 0 01.067-.3c.08-.204.243-.342.457-.392a.763.763 0 01.563.076c.125.078.205.19.243.327.02.07.027.14.03.212v.176z"/>
+            <svg viewBox="0 0 24 24" class="fill-[#FA2E4E]" xmlns="http://www.w3.org/2000/svg">
+              <path d="M23.994 6.12395C24.0017 5.38699 23.9211 4.65175 23.754 3.93395C23.437 2.62395 22.692 1.62395 21.574 0.890953C21.0037 0.524783 20.3652 0.277825 19.697 0.164953C19.1801 0.0759486 18.6573 0.0258082 18.133 0.0149531C18.093 0.0119531 18.05 0.00495313 18.009 0.00195312H5.986C5.834 0.0119531 5.683 0.0189531 5.531 0.0279531C4.784 0.0709531 4.041 0.150953 3.338 0.427953C2.002 0.957953 1.038 1.87995 0.473 3.20795C0.281 3.65595 0.181 4.13295 0.11 4.61595C0.054 5.00795 0.022 5.40095 0.01 5.79595C0.01 5.82795 0.003 5.85795 0 5.88895V18.112C0.01 18.252 0.017 18.395 0.027 18.536C0.077 19.351 0.181 20.16 0.524 20.909C1.174 22.329 2.262 23.262 3.758 23.71C4.178 23.837 4.614 23.897 5.051 23.938C5.606 23.991 6.161 23.998 6.718 23.998H17.748C18.2729 23.9976 18.7973 23.9642 19.318 23.898C20.14 23.792 20.914 23.548 21.613 23.088C22.4421 22.552 23.0957 21.7847 23.493 20.881C23.679 20.461 23.786 20.011 23.863 19.557C23.976 18.882 24.001 18.199 24 17.517C23.998 13.717 24 9.92195 23.997 6.12395H23.994ZM17.571 10.114V15.826C17.571 16.243 17.513 16.653 17.327 17.032C17.037 17.622 16.567 17.994 15.939 18.172C15.589 18.272 15.233 18.329 14.869 18.345C13.919 18.39 13.096 17.745 12.926 16.809C12.8546 16.4048 12.9174 15.9884 13.1048 15.6233C13.2923 15.2582 13.594 14.9645 13.964 14.787C14.287 14.627 14.634 14.537 14.982 14.463C15.36 14.381 15.74 14.31 16.116 14.223C16.39 14.16 16.573 13.993 16.626 13.707C16.6396 13.6435 16.6463 13.5788 16.646 13.514C16.646 11.699 16.646 9.88395 16.644 8.07095C16.6433 8.00842 16.6346 7.94624 16.618 7.88595C16.578 7.73595 16.468 7.64295 16.314 7.65195C16.154 7.66195 15.996 7.68695 15.839 7.71795C15.079 7.86795 14.319 8.02095 13.559 8.17395L11.234 8.64395L9.86 8.92195C9.844 8.92495 9.828 8.93195 9.812 8.93495C9.535 9.01195 9.435 9.13795 9.422 9.42495C9.42 9.46695 9.422 9.51095 9.422 9.55495C9.42 12.157 9.422 14.759 9.419 17.36C9.419 17.78 9.372 18.196 9.204 18.587C8.926 19.227 8.434 19.627 7.77 19.82C7.42 19.92 7.06 19.98 6.695 19.992C5.735 20.028 4.94 19.392 4.775 18.448C4.635 17.636 5.005 16.763 5.929 16.373C6.286 16.223 6.659 16.141 7.037 16.063C7.324 16.003 7.612 15.947 7.897 15.886C8.28 15.803 8.48 15.563 8.497 15.172V15.022C8.497 12.062 8.497 9.09995 8.499 6.13995C8.499 6.01695 8.512 5.88995 8.541 5.76995C8.611 5.48495 8.814 5.32195 9.087 5.25195C9.342 5.18595 9.602 5.13995 9.861 5.08695C10.594 4.93695 11.327 4.79095 12.061 4.64295L14.331 4.18295C15.001 4.04895 15.671 3.91295 16.341 3.77995C16.561 3.73695 16.783 3.69195 17.004 3.67395C17.314 3.64895 17.527 3.84395 17.558 4.15595C17.566 4.22895 17.57 4.30395 17.57 4.37895C17.572 6.28895 17.572 8.20095 17.57 10.111L17.571 10.114Z"/>
             </svg>
           </a>
         {% endif %}
         {% if section.settings.youtube_url %}
           <a
             href="{{ section.settings.youtube_url }}"
-            class="platform-link youtube"
+            class="inline-flex items-center justify-center w-10 h-10  transition-all duration-300 hover:scale-110 hover:bg-white/10 hover:border-[#ff0000] hover:shadow-[0_0_20px_rgba(255,0,0,0.5)] active:scale-95"
             target="_blank"
             rel="noopener"
             aria-label="Watch on YouTube"
           >
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            <svg class="fill-[#FF0000]" viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11.9883 0.770508C12.0411 0.770514 19.3343 0.773005 21.1514 1.26855C22.1651 1.54286 22.9571 2.33493 23.2314 3.34863C24.0075 6.47287 23.8278 11.4066 23.2461 14.6514C22.9718 15.6651 22.1797 16.4571 21.166 16.7314C19.3417 17.2287 12.0029 17.2285 12.0029 17.2285C11.9663 17.2285 4.65916 17.2275 2.83984 16.7314C1.82616 16.4571 1.03407 15.6651 0.759766 14.6514C-0.0208188 11.5406 0.193527 6.6035 0.745117 3.36328C1.01942 2.34972 1.81068 1.55757 2.82422 1.2832C4.64784 0.785853 11.9883 0.770508 11.9883 0.770508ZM9.65234 12.5264L15.7412 9L9.65234 5.47363V12.5264Z"/>
             </svg>
           </a>
         {% endif %}
       </div>
     </div>
+
+    <!-- Lyrics Section -->
     {% if section.settings.lyrics %}
-      <div class="lyrics">
+      <div class="text-white/60 text-base leading-relaxed text-left max-lg:hidden">
         {{ section.settings.lyrics }}
       </div>
     {% endif %}
   </div>
 </div>
 
-{% stylesheet %}
-  .hero-section {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    min-height: 600px;
-    overflow: hidden;
-  }
-
-  .video-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-  }
-
-  .hero-video {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100vw;
-    height: 56.25vw;
-    min-height: 100vh;
-    min-width: 177.77vh;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-  }
-
-  .video-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.9) 100%);
-    z-index: 2;
-  }
-
-  .hero-content {
-    position: relative;
-    z-index: 3;
-    height: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 2rem;
-    max-width: 1400px;
-    margin: 0 auto;
-  }
-
-  .band-name {
-    font-size: clamp(3rem, 10vw, 8rem);
-    font-weight: 900;
-    letter-spacing: -0.05em;
-    text-transform: uppercase;
-    color: #fff;
-    margin: 0;
-    line-height: 0.9;
-    text-shadow: 3px 3px 0 #000, -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000, 0 0 30px rgba(255, 255, 255, 0.3);
-    animation: glitch 3s infinite;
-  }
-
-  @keyframes glitch {
-    0%,
-    100% {
-      text-shadow: 3px 3px 0 #000, -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000, 0 0 30px rgba(255, 255, 255, 0.3);
-    }
-    97% {
-      text-shadow: 3px 3px 0 #000, -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000, 0 0 30px rgba(255, 255, 255, 0.3);
-    }
-    98% {
-      text-shadow: -5px 0 0 rgba(255, 255, 255, 0.5), 5px 0 0 rgba(128, 128, 128, 0.5), 3px 3px 0 #000, -3px -3px 0 #000,
-        0 0 30px rgba(255, 255, 255, 0.5);
-    }
-    99% {
-      text-shadow: 3px 3px 0 #000, -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000, 0 0 30px rgba(255, 255, 255, 0.3);
-    }
-  }
-
-  .announcement {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: left;
-  }
-
-  .album-title {
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin: 0 0 0.5rem 0;
-    line-height: 1;
-  }
-
-  .album-subtitle {
-    font-size: clamp(0.9rem, 2vw, 1.2rem);
-    text-transform: uppercase;
-    letter-spacing: 0.3em;
-    color: #888;
-    margin: 0;
-    font-weight: 300;
-  }
-
-  .platform-links {
-    display: flex;
-    gap: 1rem;
-    margin-top: 2rem;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-  }
-
-  .platform-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: transparent;
-    border: 2px solid #fff;
-    transition: all 0.3s ease;
-    position: relative;
-  }
-
-  .platform-link svg {
-    width: 24px;
-    height: 24px;
-    fill: #fff;
-    transition: transform 0.3s ease;
-  }
-
-  .platform-link:hover {
-    transform: scale(1.1);
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-  }
-
-  .platform-link:hover svg {
-    transform: scale(1.1);
-  }
-
-  .platform-link.spotify:hover {
-    border-color: #1db954;
-    box-shadow: 0 0 20px rgba(29, 185, 84, 0.5);
-  }
-
-  .platform-link.apple-music:hover {
-    border-color: #fa2e4e;
-    box-shadow: 0 0 20px rgba(250, 46, 78, 0.5);
-  }
-
-  .platform-link.youtube:hover {
-    border-color: #ff0000;
-    box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
-  }
-
-  .platform-link:active {
-    transform: scale(0.95);
-  }
-
-  .lyrics {
-    max-width: 500px;
-    color: #fff;
-    font-size: 1.1rem;
-    line-height: 1.8;
-    text-align: left;
-    background: rgba(0, 0, 0, 0.6);
-    padding: 2rem;
-    border-radius: 8px;
-    backdrop-filter: blur(10px);
-  }
-
-  .lyrics p {
-    margin: 0 0 1rem 0;
-  }
-
-  .lyrics p:last-child {
-    margin-bottom: 0;
-  }
-
-  @media (max-width: 768px) {
-    .hero-content {
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 1rem;
-    }
-
-    .announcement {
-      align-items: center;
-    }
-
-    .platform-links {
-      justify-content: center;
-      gap: 1rem;
-    }
-
-    .lyrics {
-      margin-top: 2rem;
-      text-align: left;
-      max-width: 100%;
-    }
-  }
-{% endstylesheet %}
-
 {% schema %}
 {
   "name": "Featured Album",
   "settings": [
+    {
+      "type": "header",
+      "content": "Background Video"
+    },
+    {
+      "type": "text",
+      "id": "video_url",
+      "label": "YouTube Video URL",
+      "info": "Enter a YouTube URL (e.g., https://www.youtube.com/watch?v=VIDEO_ID)",
+      "default": "https://www.youtube.com/watch?v=_faV3W_mheM"
+    },
+    {
+      "type": "html",
+      "id": "video_embed",
+      "label": "Custom Video Embed Code",
+      "info": "Alternative: Paste custom iframe embed code here (overrides YouTube URL)"
+    },
+    {
+      "type": "header",
+      "content": "Album Information"
+    },
     {
       "type": "text",
       "id": "subtitle_text",
@@ -302,6 +133,10 @@
       "default": "<p></p>"
     },
     {
+      "type": "header",
+      "content": "Platform Links"
+    },
+    {
       "type": "url",
       "id": "spotify_url",
       "label": "Spotify URL"
@@ -314,7 +149,7 @@
     {
       "type": "url",
       "id": "youtube_url",
-      "label": "YouTube URL"
+      "label": "YouTube Music URL"
     }
   ],
   "presets": [
