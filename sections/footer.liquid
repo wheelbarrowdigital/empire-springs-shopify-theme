@@ -1,55 +1,174 @@
-<footer>
-  <div class="footer__copyright">
-    &copy;
-    {{ 'now' | date: '%Y' }}
-    {{ shop.name | link_to: routes.root_url }}, {{ powered_by_link }}
-  </div>
+<footer class="bg-black text-white border-t border-white/10 mt-20">
+  <div class="px-8 md:px-12 lg:px-20 py-16">
+    <div class="max-w-7xl mx-auto">
+      <!-- Main Footer Content -->
+      <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-12 mb-12">
+        <!-- Brand/Logo Column -->
+        <div class="md:col-span-1">
+          <h2 class="text-2xl font-black uppercase tracking-wider mb-4">
+            <a href="{{ routes.root_url }}" class="hover:text-white/80 transition-colors">
+              {{ shop.name }}
+            </a>
+          </h2>
+          <p class="text-white/50 text-sm leading-relaxed">
+            {% if section.settings.footer_text %}
+              {{ section.settings.footer_text }}
+            {% else %}
+              Official merchandise and music
+            {% endif %}
+          </p>
+        </div>
 
-  <div class="footer__links">
-    {% for link in section.settings.menu.links %}
-      {{ link.title | link_to: link.url }}
-    {% endfor %}
-  </div>
+        <!-- Quick Links -->
+        {% if section.settings.menu %}
+          <div>
+            <h3 class="text-sm uppercase tracking-[0.3em] text-white/50 mb-6">Quick Links</h3>
+            <ul class="space-y-3">
+              {% for link in section.settings.menu.links %}
+                <li>
+                  <a href="{{ link.url }}" class="text-white/70 hover:text-white transition-colors uppercase text-sm tracking-wider">
+                    {{ link.title }}
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
 
-  <div class="footer__payment">
-    {% if section.settings.show_payment_icons %}
-      {% for type in shop.enabled_payment_types %}
-        {{ type | payment_type_svg_tag }}
-      {% endfor %}
-    {% endif %}
+        <!-- Social Links -->
+        <div>
+          <h3 class="text-sm uppercase tracking-[0.3em] text-white/50 mb-6">Follow</h3>
+          <div class="flex gap-4">
+            {% if section.settings.social_facebook %}
+              <a href="{{ section.settings.social_facebook }}" target="_blank" rel="noopener" class="text-white/70 hover:text-white transition-colors" aria-label="Facebook">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+              </a>
+            {% endif %}
+            {% if section.settings.social_instagram %}
+              <a href="{{ section.settings.social_instagram }}" target="_blank" rel="noopener" class="text-white/70 hover:text-white transition-colors" aria-label="Instagram">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.405a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z"/>
+                </svg>
+              </a>
+            {% endif %}
+            {% if section.settings.social_twitter %}
+              <a href="{{ section.settings.social_twitter }}" target="_blank" rel="noopener" class="text-white/70 hover:text-white transition-colors" aria-label="Twitter">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                </svg>
+              </a>
+            {% endif %}
+            {% if section.settings.social_youtube %}
+              <a href="{{ section.settings.social_youtube }}" target="_blank" rel="noopener" class="text-white/70 hover:text-white transition-colors" aria-label="YouTube">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+              </a>
+            {% endif %}
+            {% if section.settings.social_spotify %}
+              <a href="{{ section.settings.social_spotify }}" target="_blank" rel="noopener" class="text-white/70 hover:text-white transition-colors" aria-label="Spotify">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+                </svg>
+              </a>
+            {% endif %}
+          </div>
+        </div>
+
+        <!-- Newsletter -->
+        <div>
+          <h3 class="text-sm uppercase tracking-[0.3em] text-white/50 mb-6">Newsletter</h3>
+          <form action="/contact#newsletter" method="post" class="space-y-4">
+            <input type="hidden" name="form_type" value="customer">
+            <input type="hidden" name="utf8" value="✓">
+            <input 
+              type="email" 
+              name="contact[email]" 
+              placeholder="Your email" 
+              required
+              class="w-full bg-transparent border border-white/20 px-4 py-3 text-sm uppercase tracking-wider placeholder-white/30 focus:border-white/50 focus:outline-none transition-colors"
+            >
+            <button type="submit" class="w-full bg-white text-black px-4 py-3 text-sm uppercase tracking-wider font-bold hover:bg-white/90 transition-colors">
+              Subscribe
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="pt-8 border-t border-white/10">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+          <!-- Copyright -->
+          <div class="text-white/50 text-sm">
+            &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.
+          </div>
+
+          <!-- Payment Methods -->
+          {% if section.settings.show_payment_icons and shop.enabled_payment_types != empty %}
+            <div class="flex gap-3 items-center">
+              {% for type in shop.enabled_payment_types %}
+                <div class="text-white/30">
+                  {{ type | payment_type_svg_tag: class: 'h-8' }}
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
   </div>
 </footer>
 
-{% stylesheet %}
-  footer {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 2rem;
-  }
-  footer a {
-    text-decoration: none;
-    color: var(--color-foreground);
-  }
-  footer .footer__links,
-  footer .footer__payment {
-    display: flex;
-    gap: 1rem;
-  }
-{% endstylesheet %}
-
 {% schema %}
 {
-  "name": "t:general.footer",
+  "name": "Footer",
   "settings": [
+    {
+      "type": "textarea",
+      "id": "footer_text",
+      "label": "Footer Description",
+      "default": "Official merchandise and music"
+    },
     {
       "type": "link_list",
       "id": "menu",
-      "label": "t:labels.menu"
+      "label": "Footer Menu"
+    },
+    {
+      "type": "header",
+      "content": "Social Media"
+    },
+    {
+      "type": "text",
+      "id": "social_facebook",
+      "label": "Facebook URL"
+    },
+    {
+      "type": "text",
+      "id": "social_instagram",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "text",
+      "id": "social_twitter",
+      "label": "Twitter URL"
+    },
+    {
+      "type": "text",
+      "id": "social_youtube",
+      "label": "YouTube URL"
+    },
+    {
+      "type": "text",
+      "id": "social_spotify",
+      "label": "Spotify URL"
     },
     {
       "type": "checkbox",
       "id": "show_payment_icons",
-      "label": "t:labels.show_payment_icons",
+      "label": "Show payment icons",
       "default": true
     }
   ]
