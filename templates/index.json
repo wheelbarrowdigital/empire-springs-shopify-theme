@@ -41,9 +41,10 @@
     "full-width-image": {
       "type": "full-width-image",
       "settings": {
+        "image": "shopify://shop_images/ab6761610000e5ebb4ba7ea80cc4f894950f20fe.jpg",
         "image_alt": "",
         "image_position": "cover",
-        "section_height": "h-96",
+        "section_height": "h-auto",
         "enable_overlay": false,
         "overlay_opacity": 50,
         "heading": "",
