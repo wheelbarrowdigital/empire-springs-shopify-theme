@@ -14,8 +14,14 @@
     "footer": {
       "type": "footer",
       "settings": {
-        "menu": "",
-        "show_payment_icons": true
+        "footer_text": "Official merchandise and music",
+        "menu": "footer",
+        "social_facebook": "",
+        "social_instagram": "",
+        "social_twitter": "",
+        "social_youtube": "",
+        "social_spotify": "",
+        "show_payment_icons": false
       }
     }
   },
