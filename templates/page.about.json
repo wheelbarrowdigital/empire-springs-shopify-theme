@@ -12,9 +12,36 @@
     "main": {
       "type": "page",
       "settings": {}
+    },
+    "about_g3m84R": {
+      "type": "about",
+      "name": "About",
+      "settings": {
+        "subtitle": "",
+        "title": "About Us",
+        "image": "shopify://shop_images/ab6761610000e5ebb4ba7ea80cc4f894950f20fe.jpg",
+        "image_alt": "",
+        "show_overlay": false,
+        "heading": "Empire Springs",
+        "content": "<p>Empire Springs began as a studio project between college friends to bring a few demos to life. After several recording sessions and member changes, the band had found its sound. Blending technical guitar riffs with atmospheric synths and melodic sensibilities, Empire Springs had begun to craft songs that displayed their musicianship without sacrificing accessibility for the listener.</p><p>Working with producer/mix engineer John Douglass (The Contortionist) they were able to bring their songs to life with their upcoming full length album ‘The Luminescence.’ The album spans a wide variety of musical influences, exploring a vast soundscape that ranges from heavy metal breakdowns to synth driven ambience, and everything in-between.<br/><br/></p>",
+        "button_label": "",
+        "button_link": "",
+        "button_2_label": "",
+        "button_2_link": "",
+        "show_stats": false,
+        "show_timeline": false,
+        "timeline_title": "Our Journey",
+        "show_members": false,
+        "members_title": "The Band",
+        "show_social": true,
+        "instagram_url": "https://www.instagram.com/empiresprings/",
+        "facebook_url": "",
+        "twitter_url": ""
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "about_g3m84R"
   ]
 }
