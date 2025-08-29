@@ -11,7 +11,22 @@
   "sections": {
     "main": {
       "type": "collection",
-      "settings": {}
+      "settings": {
+        "show_collection_hero": true,
+        "hero_height": "h-64",
+        "products_per_page": 24,
+        "products_per_row_desktop": "3",
+        "products_per_row_mobile": "2",
+        "enable_sorting": true,
+        "enable_filtering": true,
+        "enable_view_toggle": true,
+        "show_vendor": false,
+        "show_color_swatches": true,
+        "enable_quick_view": false,
+        "enable_quick_add": false,
+        "show_new_badge": true,
+        "new_badge_days": 30
+      }
     }
   },
   "order": [
