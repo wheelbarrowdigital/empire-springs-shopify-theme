@@ -1,0 +1,415 @@
+<section class="about-section py-16 md:py-24 px-8 md:px-12 lg:px-20">
+  <div class="max-w-7xl mx-auto">
+    <!-- Section Header -->
+    <div class="text-center mb-12 md:mb-16">
+      {% if section.settings.subtitle %}
+        <p class="text-xs md:text-sm uppercase tracking-[0.3em] text-white/50 font-light mb-4">
+          {{ section.settings.subtitle }}
+        </p>
+      {% endif %}
+      {% if section.settings.title %}
+        <h2 class="text-4xl md:text-5xl lg:text-6xl text-white font-black uppercase tracking-tight">
+          {{ section.settings.title }}
+        </h2>
+      {% endif %}
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <!-- Image Column -->
+      {% if section.settings.image %}
+        <div class="relative">
+          <div class="aspect-square overflow-hidden bg-black/50">
+            {{
+              section.settings.image
+              | image_url: width: 800
+              | image_tag: class: 'w-full h-full object-cover', loading: 'lazy', alt: section.settings.image_alt
+              | default: section.settings.title
+            }}
+          </div>
+          {% if section.settings.show_overlay %}
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      <!-- Text Content Column -->
+      <div class="space-y-6">
+        {% if section.settings.heading %}
+          <h3 class="text-2xl md:text-3xl text-white font-bold uppercase tracking-wider">
+            {{ section.settings.heading }}
+          </h3>
+        {% endif %}
+
+        {% if section.settings.content %}
+          <div class="text-white/70 leading-relaxed space-y-4 prose prose-invert max-w-none">
+            {{ section.settings.content }}
+          </div>
+        {% endif %}
+
+        <!-- Stats/Highlights -->
+        {% if section.settings.show_stats %}
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-6 mt-8 pt-8 border-t border-white/10">
+            {% for block in section.blocks %}
+              {% case block.type %}
+                {% when 'stat' %}
+                  <div class="text-center">
+                    <div class="text-3xl md:text-4xl font-black text-white">
+                      {{ block.settings.number }}
+                    </div>
+                    <div class="text-sm uppercase tracking-[0.2em] text-white/50 mt-2">
+                      {{ block.settings.label }}
+                    </div>
+                  </div>
+              {% endcase %}
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        <!-- CTA Buttons -->
+        {% if section.settings.button_label != blank or section.settings.button_2_label != blank %}
+          <div class="flex flex-wrap gap-4 mt-8">
+            {% if section.settings.button_label != blank %}
+              <a
+                href="{{ section.settings.button_link }}"
+                class="inline-block bg-white text-black px-8 py-4 text-sm uppercase tracking-[0.2em] font-bold hover:bg-white/90 transition-colors"
+              >
+                {{ section.settings.button_label }}
+              </a>
+            {% endif %}
+            {% if section.settings.button_2_label != blank %}
+              <a
+                href="{{ section.settings.button_2_link }}"
+                class="inline-block border border-white/30 text-white px-8 py-4 text-sm uppercase tracking-[0.2em] font-bold hover:bg-white hover:text-black transition-all"
+              >
+                {{ section.settings.button_2_label }}
+              </a>
+            {% endif %}
+          </div>
+        {% endif %}
+
+        <!-- Social Links -->
+        {% if section.settings.show_social %}
+          <div class="flex gap-4 mt-8">
+            {% if section.settings.instagram_url != blank %}
+              <a
+                href="{{ section.settings.instagram_url }}"
+                target="_blank"
+                rel="noopener"
+                class="text-white/70 hover:text-white transition-colors"
+                aria-label="Instagram"
+              >
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.405a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z"/>
+                </svg>
+              </a>
+            {% endif %}
+            {% if section.settings.facebook_url != blank %}
+              <a
+                href="{{ section.settings.facebook_url }}"
+                target="_blank"
+                rel="noopener"
+                class="text-white/70 hover:text-white transition-colors"
+                aria-label="Facebook"
+              >
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+              </a>
+            {% endif %}
+            {% if section.settings.twitter_url != blank %}
+              <a
+                href="{{ section.settings.twitter_url }}"
+                target="_blank"
+                rel="noopener"
+                class="text-white/70 hover:text-white transition-colors"
+                aria-label="Twitter"
+              >
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                </svg>
+              </a>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Timeline/History Section -->
+    {% if section.settings.show_timeline %}
+      <div class="mt-16 md:mt-24">
+        <h3 class="text-2xl md:text-3xl text-white font-bold uppercase tracking-wider text-center mb-12">
+          {{ section.settings.timeline_title | default: 'Our Journey' }}
+        </h3>
+        <div class="space-y-8">
+          {% for block in section.blocks %}
+            {% case block.type %}
+              {% when 'timeline_item' %}
+                <div class="flex gap-6 md:gap-8 group">
+                  <div class="flex-shrink-0">
+                    <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center group-hover:bg-white/20 transition-colors">
+                      <span class="text-white/70 text-sm font-bold">{{ block.settings.year }}</span>
+                    </div>
+                  </div>
+                  <div class="flex-grow pb-8 border-l border-white/10 pl-6 md:pl-8">
+                    <h4 class="text-lg text-white font-bold mb-2">{{ block.settings.title }}</h4>
+                    <p class="text-white/70 leading-relaxed">{{ block.settings.description }}</p>
+                  </div>
+                </div>
+            {% endcase %}
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+
+    <!-- Band Members Grid -->
+    {% if section.settings.show_members %}
+      <div class="mt-16 md:mt-24">
+        <h3 class="text-2xl md:text-3xl text-white font-bold uppercase tracking-wider text-center mb-12">
+          {{ section.settings.members_title | default: 'The Band' }}
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {% for block in section.blocks %}
+            {% case block.type %}
+              {% when 'member' %}
+                <div class="text-center group">
+                  {% if block.settings.image %}
+                    <div class="aspect-square overflow-hidden bg-black/50 mb-4">
+                      {{
+                        block.settings.image
+                        | image_url: width: 400
+                        | image_tag:
+                          class: 'w-full h-full object-cover group-hover:scale-105 transition-transform duration-500',
+                          loading: 'lazy',
+                          alt: block.settings.name
+                      }}
+                    </div>
+                  {% endif %}
+                  <h4 class="text-lg text-white font-bold uppercase tracking-wider">
+                    {{ block.settings.name }}
+                  </h4>
+                  <p class="text-sm text-white/50 uppercase tracking-[0.2em] mt-1">
+                    {{ block.settings.role }}
+                  </p>
+                </div>
+            {% endcase %}
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About",
+  "tag": "section",
+  "class": "about",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Header"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "The Story"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "About Us"
+    },
+    {
+      "type": "header",
+      "content": "Main Content"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Featured Image"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image Alt Text"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_overlay",
+      "label": "Show image overlay",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Content Heading",
+      "default": "Empire Springs"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Main Content",
+      "default": "<p>Share your story, your journey, and what makes your music unique. This is where you connect with your audience on a deeper level.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Call to Action"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "text",
+      "id": "button_2_label",
+      "label": "Secondary Button Label"
+    },
+    {
+      "type": "url",
+      "id": "button_2_link",
+      "label": "Secondary Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Features"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_stats",
+      "label": "Show Statistics",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_timeline",
+      "label": "Show Timeline",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "timeline_title",
+      "label": "Timeline Title",
+      "default": "Our Journey"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_members",
+      "label": "Show Band Members",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "members_title",
+      "label": "Members Section Title",
+      "default": "The Band"
+    },
+    {
+      "type": "header",
+      "content": "Social Links"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social",
+      "label": "Show Social Links",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "instagram_url",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "text",
+      "id": "facebook_url",
+      "label": "Facebook URL"
+    },
+    {
+      "type": "text",
+      "id": "twitter_url",
+      "label": "Twitter URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Statistic",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "100+"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Shows"
+        }
+      ]
+    },
+    {
+      "type": "timeline_item",
+      "name": "Timeline Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "year",
+          "label": "Year",
+          "default": "2020"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Band Formation"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "The beginning of our musical journey."
+        }
+      ]
+    },
+    {
+      "type": "member",
+      "name": "Band Member",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Member Photo"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Member Name"
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "Role",
+          "default": "Vocalist"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "About",
+      "category": "Content"
+    }
+  ]
+}
+{% endschema %}
