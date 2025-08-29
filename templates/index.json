@@ -12,17 +12,18 @@
     "featured-album": {
       "type": "featured-album",
       "settings": {
-        "video_url": "https://www.youtube.com/watch?v=_faV3W_mheM",
-        "subtitle_text": "New Album Out Now",
-        "album_name": "Empire Springs",
-        "side_text": "",
-        "spotify_url": "",
-        "apple_music_url": "",
-        "youtube_url": "",
+        "video_url": "https://www.youtube.com/watch?v=7jCw9tLL054",
+        "video_embed": "",
+        "subtitle_text": "Streaming Now",
+        "album_name": "Golden",
+        "side_text": "<p>You can see right through me</p><p> always getting what you want</p><p> just to find a way into the picture</p><p>But this reflection knows me  </p><p>it’s looking past me to the north</p><p>and you aren’t one to hesitate are you? </p><p>Now I’m stuck in this cycle with no way out</p>",
+        "spotify_url": "https://open.spotify.com/artist/78UJYVVxrVvHeQVsZ0spf4",
+        "apple_music_url": "https://music.apple.com/us/artist/empire-springs/1075189077",
+        "youtube_url": "https://www.youtube.com/@empiresprings7055",
         "soundcloud_url": "",
         "bandcamp_url": "",
         "section_height": 85,
-        "overlay_opacity": "medium"
+        "overlay_opacity": "light"
       }
     },
     "featured-collection": {
@@ -40,8 +41,6 @@
     "full-width-image": {
       "type": "full-width-image",
       "settings": {
-        "image": "",
-        "image_mobile": "",
         "image_alt": "",
         "image_position": "cover",
         "section_height": "h-96",
