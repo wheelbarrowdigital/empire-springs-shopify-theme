@@ -11,7 +11,15 @@
   "sections": {
     "main": {
       "type": "product",
-      "settings": {}
+      "settings": {
+        "show_vendor": false,
+        "show_color_swatches": true,
+        "show_dynamic_checkout": true,
+        "shipping_info": "<p>Free shipping on orders over $100. Standard shipping takes 3-5 business days. Express shipping available at checkout.</p>",
+        "size_guide": "",
+        "show_share_buttons": true,
+        "show_related_products": false
+      }
     }
   },
   "order": [
